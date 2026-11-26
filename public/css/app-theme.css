@@ -1,0 +1,639 @@
+/* ASESORÍAS LORENS · Tema visual v2
+   Cargar DESPUÉS de app-custom.css:
+   <link rel="stylesheet" href="css/app-theme.css">                      */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap');
+
+:root {
+  --navy-950: #0a1620;
+  --navy-900: #10222f;
+  --navy-800: #1a3548;
+  --slate-50: #f6f7f5;
+  --slate-100: #eef0ed;
+  --slate-200: #e0e3de;
+  --slate-300: #cdd2cb;
+  --slate-400: #9aa39b;
+  --slate-500: #6b756d;
+  --slate-600: #515a53;
+  --slate-700: #3a423c;
+  --slate-900: #151a16;
+  --amber-400: #f2b24a;
+  --amber-500: #e8991f;
+  --amber-600: #c97e0c;
+  --emerald-600: #1f8a6a;
+  --primary: #1a3548;
+  --paper: #fbfbf9;
+  --line: #dfe2dc;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(16, 34, 47, .06), 0 4px 14px rgba(16, 34, 47, .05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--slate-900);
+  background: var(--slate-50);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h4,
+h5,
+h6,
+.acta-title,
+.login-title {
+  font-family: 'IBM Plex Sans Condensed', 'IBM Plex Sans', sans-serif;
+  letter-spacing: .01em;
+}
+
+code {
+  background: var(--slate-100);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: .85em;
+}
+
+/* Cifras alineadas en todo el sistema */
+.metric-val,
+.amount-col,
+td.amount-col,
+.table-acta td,
+.financial-summary-table td,
+#sum-total,
+#snapshot-preview-neto,
+#snapshot-preview-total {
+  font-family: 'IBM Plex Sans', sans-serif !important;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ---------- Foco visible y movimiento reducido ---------- */
+:focus-visible {
+  outline: 3px solid var(--amber-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Navbar ---------- */
+nav {
+  background: var(--navy-950) !important;
+  box-shadow: none;
+  border-bottom: 3px solid var(--amber-500);
+  height: 64px;
+  line-height: 64px;
+}
+
+.brand-badge-icon {
+  background: var(--amber-500);
+  color: var(--navy-950);
+  border-radius: 8px;
+}
+
+.brand-text-main {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.brand-text-sub {
+  color: var(--slate-400);
+}
+
+.nav-tab-btn {
+  font-weight: 500;
+  font-size: .88rem;
+  opacity: .75;
+  border-radius: 6px;
+  transition: opacity .15s, background .15s;
+}
+
+.nav-tab-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, .08);
+}
+
+.nav-tab-btn.active-nav-link {
+  opacity: 1;
+  background: rgba(232, 153, 31, .18);
+  box-shadow: inset 0 -2px 0 var(--amber-500);
+}
+
+.role-toggle-pill,
+.user-profile-nav-pill {
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+}
+
+.btn-nav-logout {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: transparent;
+  color: #fff;
+}
+
+.btn-nav-logout:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
+/* ---------- Botones ---------- */
+.btn,
+.btn-large,
+.btn-small {
+  border-radius: 8px;
+  box-shadow: none;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.btn:hover,
+.btn-large:hover {
+  box-shadow: 0 2px 8px rgba(16, 34, 47, .2);
+}
+
+.btn.amber.darken-3 {
+  background: var(--amber-500) !important;
+  color: var(--navy-950);
+}
+
+.btn.amber.darken-3:hover {
+  background: var(--amber-400) !important;
+}
+
+.btn.amber.darken-3 i {
+  color: var(--navy-950);
+}
+
+/* ---------- Login ---------- */
+body:not(.is-authenticated) #app-navbar,
+body:not(.is-authenticated) .navbar-fixed,
+body:not(.is-authenticated) nav,
+body:not(.is-authenticated) .mobile-bottom-nav,
+body:not(.is-authenticated) #main-app-content {
+  display: none !important;
+}
+
+body:not(.is-authenticated) {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 0 !important;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#view-login {
+  background: radial-gradient(1100px 500px at 15% -10%, #1f4a66 0%, transparent 60%), var(--navy-950);
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.login-container-card {
+  background: var(--paper);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  border-top: 4px solid var(--amber-500);
+}
+
+.login-brand-icon {
+  background: var(--navy-900);
+  color: var(--amber-400);
+  border-radius: 14px;
+}
+
+.quick-profile-btn {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.quick-profile-btn:hover {
+  border-color: var(--amber-500);
+  box-shadow: var(--shadow);
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]) {
+  border-bottom: 2px solid var(--amber-500) !important;
+  box-shadow: none !important;
+}
+
+.input-field label {
+  color: var(--slate-500);
+}
+
+.input-field input:focus+label {
+  color: var(--navy-800) !important;
+}
+
+/* ---------- Tarjetas y hojas ---------- */
+.case-control-card,
+.acta-sheet,
+.financial-summary-card,
+.admin-card-section {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.case-control-card {
+  padding: 10px 18px;
+  margin-bottom: 14px;
+}
+
+.acta-sheet {
+  padding: 22px 24px;
+}
+
+.acta-header-box {
+  border-bottom: 2px solid var(--navy-900);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.acta-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  margin: 0;
+}
+
+.acta-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.acta-info-item {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  font-size: .88rem;
+}
+
+.acta-info-item strong {
+  display: block;
+  font-size: .74rem;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+
+/* ---------- Métricas ---------- */
+.card-metric {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  border-left-width: 4px;
+}
+
+.card-metric.metric-blue {
+  border-left-color: var(--navy-800);
+}
+
+.card-metric.metric-amber {
+  border-left-color: var(--amber-500);
+}
+
+.card-metric.metric-emerald {
+  border-left-color: var(--emerald-600);
+}
+
+.card-metric.metric-highlight {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  border-left-color: var(--amber-500);
+}
+
+.card-metric.metric-highlight .metric-val {
+  color: #fff;
+}
+
+.card-metric.metric-highlight .metric-label,
+.card-metric.metric-highlight .metric-subtitle {
+  color: var(--amber-400) !important;
+}
+
+.metric-label {
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--slate-600);
+}
+
+.metric-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.2;
+}
+
+.metric-subtitle {
+  font-size: .75rem;
+  color: var(--slate-500);
+}
+
+.metric-icon-circle {
+  background: var(--slate-100);
+  color: var(--navy-800);
+}
+
+/* ---------- Pestañas ---------- */
+.tabs.tabs-corporate {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.tabs .tab a {
+  color: var(--slate-600);
+  font-weight: 600;
+  text-transform: none;
+  font-size: .86rem;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+  color: var(--navy-900);
+  background: var(--slate-100);
+}
+
+.tabs .indicator {
+  background: var(--amber-500);
+  height: 3px;
+}
+
+.tabs .tab i {
+  font-size: 1.1rem;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ---------- Tablas ---------- */
+.table-acta thead th,
+.admin-table thead th {
+  background: var(--navy-900);
+  color: #fff;
+  font-weight: 600;
+  font-size: .78rem;
+  padding: 10px 12px;
+  border: 0;
+}
+
+.table-acta td,
+.admin-table td {
+  padding: 9px 12px;
+  font-size: .88rem;
+  border-bottom: 1px solid var(--line);
+}
+
+table.striped>tbody>tr:nth-child(odd) {
+  background: #f4f5f2;
+}
+
+.table-acta tbody tr:hover,
+.admin-table tbody tr:hover {
+  background: #fdf3e0;
+}
+
+.amount-col {
+  text-align: right;
+}
+
+/* ---------- Resumen financiero ---------- */
+.financial-summary-card {
+  padding: 16px 18px;
+}
+
+.financial-summary-table td {
+  padding: 6px 0;
+  border: 0;
+  font-size: .9rem;
+}
+
+.financial-summary-table tr.separator td {
+  border-top: 1px solid var(--navy-900);
+  padding-top: 8px;
+}
+
+.financial-summary-table tr.total-row td {
+  background: var(--navy-900);
+  color: #fff;
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.financial-summary-table tr.total-row td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.financial-summary-table tr.total-row td:last-child {
+  border-radius: 0 8px 8px 0;
+  color: var(--amber-400);
+}
+
+/* ---------- Firmas ---------- */
+.signature-box {
+  margin-top: 36px;
+  padding-top: 10px;
+}
+
+.signature-line {
+  border-top: 1.5px solid var(--navy-900);
+  width: 70%;
+  margin: 40px auto 8px;
+}
+
+.signature-stamp-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #e3f3ec;
+  color: #14674f;
+  font-size: .72rem;
+  font-weight: 600;
+}
+
+/* ---------- Chips, colecciones, badges ---------- */
+.chip {
+  background: var(--slate-100);
+  color: var(--slate-700);
+  border: 1px solid var(--line);
+}
+
+.chip.active-sector-chip {
+  background: var(--navy-900);
+  color: #fff;
+  border-color: var(--navy-900);
+}
+
+.collection {
+  border-radius: 8px;
+}
+
+.collection .collection-item {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.admin-badge-role {
+  background: #ede7f6;
+  color: #4c1d95;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+/* ---------- Modales ---------- */
+.modal {
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.modal .modal-footer {
+  background: var(--slate-50);
+  border-top: 1px solid var(--line);
+}
+
+.modal-header-corporate {
+  border-bottom: 2px solid var(--navy-900);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formula-live-card {
+  background: var(--navy-900);
+  color: #e8f1f5;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+  border-left: 4px solid var(--amber-500);
+}
+
+.modal-profile-avatar,
+.user-avatar-circle {
+  background: var(--amber-500);
+  color: var(--navy-950);
+  font-weight: 700;
+}
+
+/* ---------- Banner admin ---------- */
+#admin-mode-banner {
+  background: #4c1d95 !important;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ---------- Móvil (inspector en terreno) ---------- */
+.mobile-inspector-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mobile-inspector-bar .btn {
+  flex: 1;
+  height: 48px;
+  line-height: 48px;
+}
+
+.mobile-bottom-nav {
+  background: var(--navy-950);
+  border-top: 3px solid var(--amber-500);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.mobile-bottom-nav a {
+  color: var(--slate-400);
+  font-size: .68rem;
+}
+
+.mobile-bottom-nav a.active {
+  color: #fff;
+}
+
+.mobile-bottom-nav a.active i {
+  color: var(--amber-400) !important;
+}
+
+@media (max-width: 600px) {
+  .acta-sheet {
+    padding: 14px 12px;
+  }
+
+  .metric-val {
+    font-size: 1.25rem;
+  }
+
+  .btn,
+  .btn-flat {
+    min-height: 44px;
+  }
+
+  main.container {
+    margin-bottom: 84px !important;
+  }
+}
+
+/* ---------- Impresión ---------- */
+@media print {
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+
+  .acta-sheet,
+  .financial-summary-card {
+    box-shadow: none;
+    border: 0;
+  }
+
+  .table-acta thead th {
+    background: #fff !important;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  .financial-summary-table tr.total-row td {
+    background: #fff !important;
+    color: #000 !important;
+    border-top: 2px solid #000;
+  }
+}
