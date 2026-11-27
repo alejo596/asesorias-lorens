@@ -5,9 +5,14 @@
  * errores con su código HTTP y notifica a la interfaz cuando la sesión caduca.
  */
 const SESSION_EXPIRED_EVENT = 'lorens:session-expired';
+const PRODUCTION_API_URL = 'https://asesorias-lorens.onrender.com/api';
 
 const ApiService = {
-  baseUrl: localStorage.getItem('lorens_api_url') || (window.location.origin.includes('http') ? window.location.origin + '/api' : 'http://localhost:3000/api'),
+  baseUrl: localStorage.getItem('lorens_api_url') || (
+    window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000/api'
+      : PRODUCTION_API_URL
+  ),
 
   async request(endpoint, options = {}) {
     const token = localStorage.getItem('lorens_token');
