@@ -5583,9 +5583,26 @@ window.loadAdjusterCases = async function() {
   }
 };
 
-window.handleAdjusterSearch = debounce(function(val) {
-  loadAdjusterCases();
-}, 300);
+// Helper universal de debounce
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait || 300);
+  };
+}
+
+let adjusterSearchTimeout = null;
+window.handleAdjusterSearch = function(val) {
+  clearTimeout(adjusterSearchTimeout);
+  adjusterSearchTimeout = setTimeout(() => {
+    loadAdjusterCases();
+  }, 300);
+};
 
 // Abrir Ficha de Cuantificación para un caso específico
 window.openAdjusterCuantificacion = async function(caseId) {

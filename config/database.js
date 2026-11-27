@@ -1,16 +1,40 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const isRemoteUrl = Boolean(process.env.DATABASE_URL);
-let cleanConnectionString = process.env.DATABASE_URL;
-if (cleanConnectionString && cleanConnectionString.includes('sslmode=')) {
-  cleanConnectionString = cleanConnectionString.replace(/[?&]sslmode=[^&]+/, '');
+function safeParseDatabaseUrl(rawUrl) {
+  if (!rawUrl) return null;
+  try {
+    const parsed = new URL(rawUrl);
+    return {
+      host: parsed.hostname,
+      port: parseInt(parsed.port, 10) || 5432,
+      user: decodeURIComponent(parsed.username),
+      password: decodeURIComponent(parsed.password),
+      database: parsed.pathname.replace(/^\//, '') || 'postgres',
+      ssl: { rejectUnauthorized: false }
+    };
+  } catch (err) {
+    // Si falla por caracteres especiales no codificados en la contraseña como ? o @
+    const match = rawUrl.match(/^postgres(?:ql)?:\/\/([^:]+):(.+)@([^@:]+)(?::(\d+))?\/([^?]+)/);
+    if (match) {
+      return {
+        user: match[1],
+        password: match[2],
+        host: match[3],
+        port: parseInt(match[4] || '5432', 10),
+        database: match[5],
+        ssl: { rejectUnauthorized: false }
+      };
+    }
+  }
+  return null;
 }
 
-const poolConfig = isRemoteUrl
+const parsedRemoteConfig = safeParseDatabaseUrl(process.env.DATABASE_URL);
+
+const poolConfig = parsedRemoteConfig
   ? {
-      connectionString: cleanConnectionString,
-      ssl: { rejectUnauthorized: false },
+      ...parsedRemoteConfig,
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 10000,
