@@ -206,7 +206,7 @@ exports.getCaseDetails = async (req, res) => {
     });
   } catch (error) {
     console.error('Error al obtener expediente en PostgreSQL:', error);
-    res.status(500).json({ error: 'Error al consultar el expediente: ' + error.message });
+    res.status(500).json({ error: 'Error al consultar el expediente: ' + error.message, stack: error.stack });
   }
 };
 

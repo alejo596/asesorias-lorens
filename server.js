@@ -38,6 +38,11 @@ app.use(
   })
 );
 
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
 // Endpoints API
 app.use('/api/auth', authRoutes);
 app.use('/api/client', clientRoutes);
